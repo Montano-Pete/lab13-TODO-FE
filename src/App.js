@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import './App.css';
 import HomePage from './HomePage.js';
 import SignUpPage from './SignUpPage.js';
@@ -11,7 +11,12 @@ export default class App extends Component {
     return (
       <Router>
         <div>
-          <h2>Header</h2>
+          <div>
+            <Link>Home</Link>
+            <Link>Login</Link>
+            <Link>SignUp</Link>
+            <Link>Todo</Link>
+          </div>
           <Switch>
             <Route path="/" exact render={(routerProps) => <HomePage {...routerProps} />} />
             <Route path="/signup" exact render={(routerProps) => <SignUpPage {...routerProps} />} />
