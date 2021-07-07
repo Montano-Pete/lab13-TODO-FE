@@ -31,3 +31,11 @@ export async function addTodos(todo, token) {
     
     return data.body;
 }
+
+export async function completeTodos(id, token) {
+    const data = await request
+        .put(`${URL}/api/todo/${id}`)
+        .set('Authorization', token)
+    
+    return data.body;
+}

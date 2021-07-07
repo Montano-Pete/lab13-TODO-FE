@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { addTodos, getTodos } from './functions.js'
+import { addTodos, completeTodos, getTodos } from './functions.js'
 
 export default class TodoPage extends Component {
 
@@ -9,6 +9,10 @@ export default class TodoPage extends Component {
     }
 
     componentDidMount = async () => {
+        await this.doFetch()
+    }
+
+    doFetch = async () => {
         const todos = await getTodos(this.props.token)
 
         this.setState({ todos })
@@ -19,9 +23,7 @@ export default class TodoPage extends Component {
 
         await addTodos(this.state.todo, this.props.token);
 
-        const todos = await getTodos(this.props.token)
-
-        this.setState({ todos })
+        await this.doFetch()
     }
 
     handleName = e => {
@@ -40,7 +42,20 @@ export default class TodoPage extends Component {
                 </form>
                 <div>
                     {
-                        this.state.todos.map(item => <p> {item.todo} </p>)
+                        this.state.todos.map(item =>
+                            <p
+                                className={item.completed ? 'complete' : 'incomplete'}
+                                
+                                key={`${item.todo} ${item.id}`}
+                                
+                                onClick={async () => {
+                                    await completeTodos(item.id, this.props.token)
+                                    
+                                    await this.doFetch()
+                                }}
+                            >
+                            {item.todo}
+                            </p>)
                     }
                 </div>
             </div>
