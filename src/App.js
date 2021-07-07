@@ -12,10 +12,10 @@ export default class App extends Component {
       <Router>
         <div>
           <div>
-            <Link>Home</Link>
-            <Link>Login</Link>
-            <Link>SignUp</Link>
-            <Link>Todo</Link>
+            <p> <Link to="/">Home</Link> </p>
+            <p> <Link to="/login">Login</Link> </p>
+            <p> <Link to="/signup">SignUp</Link> </p>
+            <p> <Link to="/todo">Todo</Link> </p>
           </div>
           <Switch>
             <Route path="/" exact render={(routerProps) => <HomePage {...routerProps} />} />
