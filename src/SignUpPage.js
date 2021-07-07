@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { signup } from './functions.js';
 
 export default class SignUpPage extends Component {
 
@@ -7,9 +8,13 @@ export default class SignUpPage extends Component {
         password: ''
     }
 
-    handleSubmit = e => {
+    handleSubmit = async e => {
         e.preventDefault();
 
+        const token = await signup(this.state.email, this.state.password)
+
+        this.props.login(token)
+        this.props.history.push("/todo")
     }
 
     handleEmail = e => {

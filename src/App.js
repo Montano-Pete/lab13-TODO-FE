@@ -7,6 +7,21 @@ import LoginPage from './LoginPage.js';
 import TodoPage from './TodoPage.js';
   
 export default class App extends Component {
+
+  state = {
+    token: ''
+  }
+
+  login = (token) => {
+    this.setState({ token })
+    localStorage.setItem('TOKEN', token)
+  }
+
+  logout = () => {
+    this.setState({ token: '' })
+    localStorage.setItem('TOKEN', '')
+  }
+
   render() {
     return (
       <Router>
@@ -19,8 +34,8 @@ export default class App extends Component {
           </div>
           <Switch>
             <Route path="/" exact render={(routerProps) => <HomePage {...routerProps} />} />
-            <Route path="/signup" exact render={(routerProps) => <SignUpPage {...routerProps} />} />
-            <Route path="/login" exact render={(routerProps) => <LoginPage {...routerProps} />} />
+            <Route path="/signup" exact render={(routerProps) => <SignUpPage login={this.login} {...routerProps} />} />
+            <Route path="/login" exact render={(routerProps) => <LoginPage login={this.login} {...routerProps} />} />
             <Route path="/todo" exact render={(routerProps) => <TodoPage {...routerProps} />} />
           </Switch>
         </div>
