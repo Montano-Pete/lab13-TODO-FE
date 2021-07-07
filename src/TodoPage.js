@@ -35,7 +35,7 @@ export default class TodoPage extends Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <label>
-                        Name
+                        Todos!
                         <input onChange={this.handleName} />
                     </label>
                     <button>Add Todo!</button>
