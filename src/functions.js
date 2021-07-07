@@ -11,3 +11,23 @@ export async function signup(email, password) {
     
     return data.body.token;
 }
+
+export async function getTodos(token) {
+    const data = await request
+        .get(`${URL}/api/todo`)
+        .set('Authorization', token)
+    
+    return data.body;
+}
+
+export async function addTodos(todo, token) {
+    const data = await request
+        .post(`${URL}/api/todo`)
+        .send({
+            todo: todo,
+            completed: false
+        })
+        .set('Authorization', token)
+    
+    return data.body;
+}
